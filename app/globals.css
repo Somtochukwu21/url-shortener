@@ -1,5 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
+@layer base {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply text-very-dark-blue;
+	}
+
+	p {
+		@apply text-grayish-violet font-semibold text-sm lg:text-lg;
+	}
+}
+
+@layer components {
+	.box > :nth-child(2) {
+		@apply lg:mt-8 my-24 lg:my-0;
+	}
+
+	.box > :last-child {
+		@apply lg:mt-16;
+	}
+}

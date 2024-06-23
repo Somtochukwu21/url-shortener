@@ -1,39 +1,43 @@
-import CustomPatternDesktop from "@/public/svg/bg-shorten-desktop.svg";
-import {  NextUIProvider } from "@nextui-org/react";
+import BoostDesktop from "@/public/svg/bg-boost-desktop.svg";
+import BoostMobile from "@/public/svg/bg-boost-mobile.svg";
+import { NextUIProvider } from "@nextui-org/react";
 import Image from "next/image";
-import { Button, LandingPage } from "../components";
+import { Button, LandingPage, StatisticsAndLinkInput } from "../components";
+import { PageFooter } from "../components/page-footer";
 
 export default function Home() {
 	return (
 		<NextUIProvider>
 			<main className="min-h-screen">
 				<LandingPage />
-				<div className=" h-72 w-full bg-grayish-violet mt-48">
-					<div className="-translate-y-24 relative bg-dark-violet max-w-7xl m-auto h-44 rounded-xl flex w-full justify-center items-center">
-						<div className="w-full h-full absolute overflow-clip rounded-xl">
-							<Image
-								src={CustomPatternDesktop}
-								className="w-full h-full"
-								alt="custom pattern for desktop"
-							/>
-						</div>
-						<div className="flex space-x-6 px-20 w-full">
-							<div className="bg-red-500 w-full">
-								<input
-									type="text"
-									className="lg:w-[1000px] h-72"
-									placeholder="Shorten a link here..."
-								/>
-							</div>
-								<Button className="w-40 h-full pxy-6 rounded-md">Shorten it!</Button>
-						</div>
+				<StatisticsAndLinkInput />
+
+				<div className="relative bg-dark-violet h-64 flex w-full justify-center items-center">
+					<div className="w-full h-full absolute overflow-clip">
+						<Image
+							src={BoostDesktop}
+							className="w-full hidden md:flex  h-full"
+							alt="Boost pattern for desktop"
+						/>
+					</div>
+					<div className="w-full h-full absolute overflow-clip">
+						<Image
+							src={BoostMobile}
+							className="w-full h-full md:hidden"
+							alt="Boost pattern for desktop"
+						/>
+					</div>
+					<div className=" z-10 text-center">
+						<h3 className="lg:text-3xl text-white font-semibold text-2xl">
+							Boost your links today
+						</h3>
+						<Button className="w-40 py-6 rounded-full mt-4 text-sm">
+							Get Started
+						</Button>
 					</div>
 				</div>
-				<div className="h-30 w-full bg-cyan">cyan</div>
-				<div className="h-30 w-full bg-dark-violet">dark violet</div>
-				<div className="h-30 w-full bg-grayish-violet">gray</div>
-				<div className="h-30 w-full bg-very-dark-violet">very dark violet</div>
-				<div className="h-30 w-full bg-very-dark-blue">very dark blue </div>
+
+				<PageFooter />
 			</main>
 		</NextUIProvider>
 	);
