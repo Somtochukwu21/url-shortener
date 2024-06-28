@@ -10,17 +10,20 @@ interface CustomButtonInterface {
 	className?: string;
 	href?: string;
 	as?: InternalForwardRefRenderFunction<"a", LinkProps, never>;
+	radius?: "none" | "sm" | "md" | "lg" | "full";
 }
 export const Button = ({
 	children,
 	className,
 	href,
 	as,
+	radius,
 }: CustomButtonInterface) => {
 	return (
 		<div>
 			<NextButton
 				as={as}
+				radius={radius}
 				className={`bg-cyan text-white text-md font-bold ${className}`}
 				href={href}>
 				{children}
