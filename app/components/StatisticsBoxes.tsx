@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { PropsDataI } from "./useBoxData";
+import { PropsDataI } from ".";
 
 export const StatisticsBoxes = ({ header, image, text }: PropsDataI) => {
 	return (
@@ -7,7 +7,7 @@ export const StatisticsBoxes = ({ header, image, text }: PropsDataI) => {
 			<div
 				className="
 			absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2
-			bg-dark-violet lg:relative lg:left-0  lg:translate-x-8 rounded-full flex items-center justify-center w-14 h-14  lg:h-16 lg:w-16">
+			bg-dark-violet lg:relative lg:left-0  lg:translate-x-8 rounded-full flex items-center justify-center w-16 h-16">
 				<Image src={image} alt="statistics icon" className="h-1/2 w-1/2" />
 			</div>
 			<div className="px-8 pt-12 lg:pt-0">

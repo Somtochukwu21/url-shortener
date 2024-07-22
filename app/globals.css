@@ -14,7 +14,7 @@
 	}
 
 	p {
-		@apply text-grayish-violet font-semibold text-sm lg:text-lg;
+		@apply  text-sm lg:text-lg;
 	}
 }
 
@@ -27,3 +27,4 @@
 		@apply lg:mt-16;
 	}
 }
+
