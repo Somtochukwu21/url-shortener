@@ -5,6 +5,7 @@ import CustomPatternMobile from "@/public/svg/bg-shorten-mobile.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { ImSpinner9 } from "react-icons/im";
 import { Button } from "./components";
 
 interface ShortenedLink {
@@ -27,10 +28,10 @@ const isValidUrl = (url: string) => {
 
 export const LinkInput: React.FC = () => {
 	const [inputValue, setInputValue] = useState<string>("");
-	const [result, setResult] = useState<string>("");
 	const [error, setError] = useState<string>("");
 	const [links, setLinks] = useState<ShortenedLink[]>([]);
 	const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	const handleShortenUrl = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -46,16 +47,24 @@ export const LinkInput: React.FC = () => {
 		}
 
 		setError("");
+		setIsLoading(true);
 
-		const response = await fetch(
-			`https://tinyurl.com/api-create.php?url=${encodeURIComponent(inputValue)}`
-		);
-		if (response.ok) {
-			const shortUrl = await response.text();
-			setResult(shortUrl);
-			setLinks([...links, { original: inputValue, short: shortUrl }]);
-		} else {
+		try {
+			const response = await fetch(
+				`https://tinyurl.com/api-create.php?url=${encodeURIComponent(
+					inputValue
+				)}`
+			);
+			if (response.ok) {
+				const shortUrl = await response.text();
+				setLinks([...links, { original: inputValue, short: shortUrl }]);
+			} else {
+				setError("Error shortening URL");
+			}
+		} catch (error) {
 			setError("Error shortening URL");
+		} finally {
+			setIsLoading(false);
 		}
 
 		setInputValue("");
@@ -107,8 +116,13 @@ export const LinkInput: React.FC = () => {
 							</div>
 							<Button
 								type="submit"
-								className="w-full h-[50px] md:h-auto mt-4 md:w-40 rounded-md md:mt-0  bg-cyan text-white">
-								Shorten it!
+								className="w-full h-[50px] text-center flex justify-center items-center md:h-auto mt-4 md:w-40 rounded-md md:mt-0 bg-cyan text-white"
+								disabled={isLoading}>
+								{isLoading ? (
+									<ImSpinner9 className=" text-3xl animate-spin" />
+								) : (
+									"Shorten it!"
+								)}
 							</Button>
 						</form>
 						<div className="d md:px-20 w-full mt-2">
