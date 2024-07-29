@@ -3,9 +3,9 @@
 import CustomPatternDesktop from "@/public/svg/bg-shorten-desktop.svg";
 import CustomPatternMobile from "@/public/svg/bg-shorten-mobile.svg";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { Button } from "./components";
-import Link from "next/link";
 
 interface ShortenedLink {
 	original: string;
@@ -45,7 +45,7 @@ export const LinkInput: React.FC = () => {
 			return;
 		}
 
-		setError(""); // Clear any previous errors
+		setError("");
 
 		const response = await fetch(
 			`https://tinyurl.com/api-create.php?url=${encodeURIComponent(inputValue)}`
@@ -75,23 +75,26 @@ export const LinkInput: React.FC = () => {
 				<div className="relative max-w-custom overflow-clip bg-dark-violet h-44 rounded-xl flex w-full justify-center items-center px-7 md:px-0">
 					<div className="w-full h-full absolute hidden md:flex">
 						<Image
+							priority
 							src={CustomPatternDesktop}
 							className="w-full h-full"
 							alt="custom pattern for desktop"
 						/>
 					</div>
+
 					<div className="w-full absolute h-full">
 						<Image
 							src={CustomPatternMobile}
-							className="w-3/5 h-3/4 absolute right-0 -z-10 flex md:hidden"
+							priority
+							className="w-3/5 h-3/4 absolute right-0 flex md:hidden"
 							alt="custom pattern for mobile"
 						/>
 					</div>
-					<div className="flex w-full flex-col">
+					<div className="flex w-full flex-col z-10">
 						<form
 							className="md:flex md:space-x-6 md:px-20 w-full"
 							onSubmit={handleShortenUrl}>
-							<div className="w-full md:z-10">
+							<div className="w-full ">
 								<input
 									type="text"
 									className={`w-full rounded-md p-[14px] md:p-4 outline-none ${
@@ -104,11 +107,11 @@ export const LinkInput: React.FC = () => {
 							</div>
 							<Button
 								type="submit"
-								className="w-full h-[50px] md:h-auto mt-4 md:w-40 rounded-md md:mt-0 md:z-10 bg-cyan text-white">
+								className="w-full h-[50px] md:h-auto mt-4 md:w-40 rounded-md md:mt-0  bg-cyan text-white">
 								Shorten it!
 							</Button>
 						</form>
-						<div className="z-10 md:px-20 w-full mt-2">
+						<div className="d md:px-20 w-full mt-2">
 							{error && <p className="text-red-500">{error}</p>}
 						</div>
 					</div>
@@ -131,7 +134,9 @@ export const LinkInput: React.FC = () => {
 								<Button
 									type="button"
 									className={`w-full md:w-[100px] py-3 rounded-md ${
-										copiedIndex === index ? "bg-dark-violet active:bg-dark-violet" : "bg-cyan"
+										copiedIndex === index
+											? "bg-dark-violet active:bg-dark-violet"
+											: "bg-cyan"
 									}`}
 									onClick={() => handleCopy(index, link.short)}
 									disabled={copiedIndex === index}>
